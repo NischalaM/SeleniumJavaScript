@@ -14,3 +14,4 @@ exports.capabilities = {
     plugin: "node_js-mocha",
   },
 };
+module.exports = { this: capabilities };

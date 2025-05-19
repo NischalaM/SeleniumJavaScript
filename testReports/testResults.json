@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2025-05-19T17:22:30.852Z",
-    "end": "2025-05-19T17:22:40.236Z",
-    "duration": 9384,
+    "start": "2025-05-19T17:43:46.176Z",
+    "end": "2025-05-19T17:43:53.260Z",
+    "duration": 7084,
     "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,25 +18,25 @@
   },
   "results": [
     {
-      "uuid": "628eccdd-9d67-442e-b07d-b76782215fdb",
+      "uuid": "b73ed7fa-8eb0-4ebf-bdf5-cec5f4e4f3d4",
       "title": "",
-      "fullFile": "E:\\Selenium_Javascript\\test\\Hovers.js",
-      "file": "\\test\\Hovers.js",
+      "fullFile": "E:\\Selenium_Javascript\\test\\windowsHandling.js",
+      "file": "\\test\\windowsHandling.js",
       "beforeHooks": [],
       "afterHooks": [],
       "tests": [],
       "suites": [
         {
-          "uuid": "59b21526-d0f7-4083-8c53-5db5118a7b4a",
-          "title": "Test cases for Hovers",
-          "fullFile": "E:\\Selenium_Javascript\\test\\Hovers.js",
-          "file": "\\test\\Hovers.js",
+          "uuid": "641d43b1-8cb4-4cb2-bcaa-050f3a098519",
+          "title": "Test cases for Windows Handling",
+          "fullFile": "E:\\Selenium_Javascript\\test\\windowsHandling.js",
+          "file": "\\test\\windowsHandling.js",
           "beforeHooks": [
             {
-              "title": "\"before all\" hook in \"Test cases for Hovers\"",
-              "fullTitle": "Test cases for Hovers \"before all\" hook in \"Test cases for Hovers\"",
+              "title": "\"before all\" hook in \"Test cases for Windows Handling\"",
+              "fullTitle": "Test cases for Windows Handling \"before all\" hook in \"Test cases for Windows Handling\"",
               "timedOut": null,
-              "duration": 236,
+              "duration": 274,
               "state": null,
               "speed": null,
               "pass": false,
@@ -45,7 +45,7 @@
               "context": null,
               "code": "driver = new Builder().forBrowser(\"chrome\").build();",
               "err": {},
-              "uuid": "5ce69def-7ef4-41ea-9d40-044a69d0ec9b",
+              "uuid": "2ac008e8-6cf9-499c-8da4-0e4e60bfab4d",
               "parentUUID": null,
               "isHook": true,
               "skipped": false
@@ -53,10 +53,10 @@
           ],
           "afterHooks": [
             {
-              "title": "\"after all\" hook in \"Test cases for Hovers\"",
-              "fullTitle": "Test cases for Hovers \"after all\" hook in \"Test cases for Hovers\"",
+              "title": "\"after all\" hook in \"Test cases for Windows Handling\"",
+              "fullTitle": "Test cases for Windows Handling \"after all\" hook in \"Test cases for Windows Handling\"",
               "timedOut": null,
-              "duration": 108,
+              "duration": 83,
               "state": null,
               "speed": null,
               "pass": false,
@@ -65,7 +65,7 @@
               "context": null,
               "code": "await driver.quit();",
               "err": {},
-              "uuid": "2f475aea-7593-48ae-80b2-6856dbf813d5",
+              "uuid": "e63ee973-802c-4810-a9b6-32328da9b8e2",
               "parentUUID": null,
               "isHook": true,
               "skipped": false
@@ -73,19 +73,19 @@
           ],
           "tests": [
             {
-              "title": "Hovers",
-              "fullTitle": "Test cases for Hovers Hovers",
+              "title": "Windows Handling",
+              "fullTitle": "Test cases for Windows Handling Windows Handling",
               "timedOut": null,
-              "duration": 8651,
+              "duration": 6337,
               "state": "passed",
               "speed": "slow",
               "pass": true,
               "fail": false,
               "pending": false,
               "context": null,
-              "code": "try {\n        await driver.manage().window().maximize();\n        await driver.get(\"https://the-internet.herokuapp.com/\");\n        await driver.findElement(By.linkText(\"Hovers\")).click();\n        await driver.wait(until.elementLocated(By.xpath(\"//h3[contains(text(),'Hovers')]\")), 10000);\n        let text= await driver.findElement(By.xpath(\"//h3[contains(text(),'Hovers')]\")).getText();\n        // assert.strictEqual(text, \"Hovers\");\n        chai.expect(text).to.equal(\"Hovers\");\n        console.log(\"Hovers page is displayed\");\n        let hoverElement = await driver.findElement(By.xpath(\"//*[@class='example']/div[2]\"));\n        const action = driver.actions({async: true});\n        await action.move({ origin: hoverElement }).perform();\n        // await action.click().perform();\n        await driver.wait(until.elementLocated(By.xpath(\"//h5[contains(text(),'name: user2')]\")), 10000);\n        let username = await driver.findElement(By.xpath(\"//h5[contains(text(),'name: user2')]\")).getText();\n        console.log(username);\n        chai.expect(username).to.equal(\"name: user2\");\n        console.log(\"User2 is displayed\");\n    }catch (error) {\n        console.error(error);\n        throw error;\n    }",
+              "code": "try {\n    await driver.manage().window().maximize();\n    await driver.get(\"https://the-internet.herokuapp.com/\");\n    await driver.findElement(By.linkText(\"Multiple Windows\")).click();\n    await driver.wait(\n      until.elementLocated(By.xpath(\"//div[@class='example']/h3\")),\n      10000\n    );\n    let text = await driver\n      .findElement(By.xpath(\"//div[@class='example']/h3\"))\n      .getText();\n    expect(text).to.equal(\"Opening a new window\");\n    console.log(\"'Opening a new window' page is displayed\");\n    await driver.findElement(By.linkText(\"Click Here\")).click();\n    let handles = await driver.getAllWindowHandles();\n    console.log(handles);\n    // switch to the new window\n    await driver.switchTo().window(handles[1]);\n    let newWindowTitle= await driver.getTitle();\n    console.log(newWindowTitle);\n    expect(newWindowTitle).to.equal(\"New Window\");\n    console.log(\"New Window page is displayed\");\n} catch (error) {\n    console.error(error);\n    throw error;\n}",
               "err": {},
-              "uuid": "34456aef-9257-4d52-985f-0204352e9eb7",
+              "uuid": "3e176ea2-b0de-4653-8bac-31cbd8047150",
               "parentUUID": null,
               "isHook": false,
               "skipped": false
@@ -93,12 +93,12 @@
           ],
           "suites": [],
           "passes": [
-            "34456aef-9257-4d52-985f-0204352e9eb7"
+            "3e176ea2-b0de-4653-8bac-31cbd8047150"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 8651,
+          "duration": 6337,
           "root": false,
           "rootEmpty": false,
           "_timeout": null
