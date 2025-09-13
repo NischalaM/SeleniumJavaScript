@@ -14,7 +14,7 @@ async function browserInitialization() {
         await driver.findElement(By.id("password")).sendKeys("Password123", Key.RETURN);
         await driver.findElement(By.id("submit")).click();
         // built in  node assertions in JS
-        let expectedresult = "Logged In successfully";
+        let expectedresult = "Logged In Successfully";
         let actualresult = await driver.findElement(By.xpath("//h1[@class='post-title']")).getAttribute("innerHTML");
         console.log(actualresult);
         assert.strictEqual(actualresult, expectedresult);
